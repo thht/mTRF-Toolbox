@@ -273,7 +273,7 @@ p = inputParser;
 
 % Dimension to work along
 errorMsg = 'It must be a positive integer scalar within indexing range.';
-validFcn = @(x) assert(x==1||x==2,errorMsg);
+validFcn = @(x) x==1||x==2;
 addParameter(p,'dim',1,validFcn);
 
 % Correlation metric
@@ -288,17 +288,17 @@ addParameter(p,'error','mse',validFcn);
 
 % Split data
 errorMsg = 'It must be a positive integer scalar.';
-validFcn = @(x) assert(isnumeric(x)&&isscalar(x),errorMsg);
+validFcn = @(x) isnumeric(x)&&isscalar(x);
 addParameter(p,'split',1,validFcn);
 
 % Window size
 errorMsg = 'It must be a positive numeric scalar within indexing range.';
-validFcn = @(x) assert(isnumeric(x)&&isscalar(x),errorMsg);
+validFcn = @(x) isnumeric(x)&&isscalar(x);
 addParameter(p,'window',0,validFcn);
 
 % Boolean arguments
 errorMsg = 'It must be a numeric scalar (0,1) or logical.';
-validFcn = @(x) assert(x==0||x==1||islogical(x),errorMsg);
+validFcn = @(x) x==0||x==1||islogical(x);
 addParameter(p,'zeropad',true,validFcn); % zero-pad design matrix
 addParameter(p,'verbose',true,validFcn); % verbose mode
 

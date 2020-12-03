@@ -166,7 +166,7 @@ p = inputParser;
 
 % Dimension to work along
 errorMsg = 'It must be a positive integer scalar within indexing range.';
-validFcn = @(x) assert(x==1||x==2,errorMsg);
+validFcn = @(x) x==1||x==2;
 addParameter(p,'dim',1,validFcn);
 
 % Correlation metric
@@ -181,7 +181,7 @@ addParameter(p,'error','msc',validFcn);
 
 % Window size
 errorMsg = 'It must be a positive numeric scalar within indexing range.';
-validFcn = @(x) assert(isnumeric(x)&&isscalar(x),errorMsg);
+validFcn = @(x) isnumeric(x)&&isscalar(x);
 addParameter(p,'window',0,validFcn);
 
 % Parse input arguments

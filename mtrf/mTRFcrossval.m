@@ -301,7 +301,7 @@ if isempty(fold)
     fprintf('\nTrain on %d folds, validate on 1 fold\n',nfold-1)
 elseif fold == 0
     fprintf('Training/validating model\n')
-    v.msg = ['%d/%d [',repelem('=',fold),repelem(' ',nfold-fold),']\n'];
+    v.msg = ['%d/%d [',repelem('=',1, fold),repelem(' ',1, nfold-fold),']\n'];
     v.h = fprintf(v.msg,fold,nfold);
 elseif fold <= nfold
     if fold == 1 && toc < 0.1
@@ -309,7 +309,7 @@ elseif fold <= nfold
     end
     v.tocs = v.tocs + toc;
     fprintf(repmat('\b',1,v.h))
-    v.msg = ['%d/%d [',repelem('=',fold),repelem(' ',nfold-fold),'] - ',...
+    v.msg = ['%d/%d [',repelem('=',1, fold),repelem(' ',1, nfold-fold),'] - ',...
         '%.3fs/fold\n'];
     v.h = fprintf(v.msg,fold,nfold,v.tocs/fold);
 end
@@ -348,7 +348,7 @@ p = inputParser;
 
 % Dimension to work along
 errorMsg = 'It must be a positive integer scalar within indexing range.';
-validFcn = @(x) assert(x==1||x==2,errorMsg);
+validFcn = @(x) x==1||x==2;
 addParameter(p,'dim',1,validFcn);
 
 % Regularization method
@@ -373,17 +373,17 @@ addParameter(p,'error','mse',validFcn);
 
 % Split data
 errorMsg = 'It must be a positive integer scalar.';
-validFcn = @(x) assert(isnumeric(x)&&isscalar(x),errorMsg);
+validFcn = @(x) isnumeric(x)&&isscalar(x);
 addParameter(p,'split',1,validFcn);
 
 % Window size
 errorMsg = 'It must be a positive numeric scalar within indexing range.';
-validFcn = @(x) assert(isnumeric(x)&&isscalar(x),errorMsg);
+validFcn = @(x) isnumeric(x)&&isscalar(x);
 addParameter(p,'window',0,validFcn);
 
 % Boolean arguments
 errorMsg = 'It must be a numeric scalar (0,1) or logical.';
-validFcn = @(x) assert(x==0||x==1||islogical(x),errorMsg);
+validFcn = @(x) x==0||x==1||islogical(x);
 addParameter(p,'zeropad',true,validFcn); % zero-pad design matrix
 addParameter(p,'fast',true,validFcn); % fast CV method
 addParameter(p,'verbose',true,validFcn); % verbose mode
